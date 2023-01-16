@@ -44,22 +44,22 @@ public class MenuController  {
   })
   public Menu create(@Valid @RequestBody Menu menu){
 
-
     return menu;
   }
 
   @PutMapping
-  public String update(Menu menu){
-    return "update Menu";
+  public Menu update(@RequestBody Menu menu){
+
+    Menu m = null;
+    m.getId();
+    return menu;
   }
 
-  @DeleteMapping
-  public String delete(){
-    return "delete Menu";
-  }
+  @DeleteMapping("{id}")
+  public ResponseEntity<Void> delete(@PathVariable int id){
 
-  @GetMapping("hello")
-  public String hello(){
-    return "Hello";
+    // 삭제 (응답코드 설정 가능)
+    return ResponseEntity.noContent().build();
   }
 }
+
