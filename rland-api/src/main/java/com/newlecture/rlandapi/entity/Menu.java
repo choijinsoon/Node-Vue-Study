@@ -10,6 +10,8 @@ import lombok.ToString;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Menu {
   private int id;
   private String name;
