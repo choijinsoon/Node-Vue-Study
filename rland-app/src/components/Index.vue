@@ -1,4 +1,22 @@
+<script>
+    import Header from './Header.vue';
+
+    export default{
+        data(){
+            return{
+
+            }
+        },
+        components:{Header},
+        methods:{
+
+        }
+    }
+</script>
+
+
 <template>
+    <Header></Header>
      <nav class="cafe">
     <div>
         <h1 class="cafe-title">부안에 오면 꼭! 들리는 카페</h1>
