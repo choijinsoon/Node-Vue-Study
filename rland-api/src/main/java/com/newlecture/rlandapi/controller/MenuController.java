@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.newlecture.rlandapi.entity.Menu;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("menus")
 public class MenuController  {
@@ -40,7 +42,7 @@ public class MenuController  {
     MediaType.APPLICATION_JSON_VALUE,
     MediaType.APPLICATION_XML_VALUE
   })
-  public Menu create(@RequestBody Menu menu){
+  public Menu create(@Valid @RequestBody Menu menu){
 
 
     return menu;
