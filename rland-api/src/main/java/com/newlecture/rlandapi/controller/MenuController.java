@@ -1,5 +1,6 @@
 package com.newlecture.rlandapi.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.newlecture.rlandapi.entity.Menu;
+
 @RestController
 @RequestMapping("menus")
-public class MenuController {
+public class MenuController  {
 
   @GetMapping
   public String getList(@RequestParam(name="p", defaultValue = "1") int page, @RequestParam(name="s", defaultValue = "15") int size){
@@ -19,18 +22,21 @@ public class MenuController {
   }
   
   
-  @GetMapping("{id}")
-  public String get(@PathVariable("id") int id){
-    return String.format("get Menu: id=%d", id);
+  @GetMapping(path = "{id}")
+  public Menu get(@PathVariable("id") int id){
+    Menu menu = Menu.builder().name("newlecture").price(1000).build();
+    System.out.println(menu.toString());
+
+    return menu;
   }
 
   @PostMapping
-  public String add(){
+  public String add(Menu menu){
     return "add Menu";
   }
 
   @PutMapping
-  public String update(){
+  public String update(Menu menu){
     return "update Menu";
   }
 
