@@ -22,8 +22,11 @@ public class MenuController  {
   }
   
   
-  @GetMapping(path = "{id}")
-  public Menu get(@PathVariable("id") int id){
+  @GetMapping(path = "{id}", produces = {
+    MediaType.APPLICATION_JSON_VALUE,
+    MediaType.APPLICATION_XML_VALUE
+  })
+  public Menu get(@PathVariable int id){
     Menu menu = Menu.builder().name("newlecture").price(1000).build();
     System.out.println(menu.toString());
 
