@@ -1,6 +1,8 @@
 package com.newlecture.rlandapi.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +28,11 @@ public class MenuController  {
     MediaType.APPLICATION_JSON_VALUE,
     MediaType.APPLICATION_XML_VALUE
   })
-  public Menu get(@PathVariable int id){
+  public ResponseEntity<Menu> get(@PathVariable int id){
     Menu menu = Menu.builder().name("newlecture").price(1000).build();
     System.out.println(menu.toString());
 
-    return menu;
+    return new ResponseEntity<Menu>(HttpStatus.NOT_FOUND);
   }
 
   @PostMapping
