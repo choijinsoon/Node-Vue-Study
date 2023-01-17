@@ -1,6 +1,8 @@
 package com.newlecture.rlandapi.entity;
 
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +11,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Builder
+@Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+// @Builder
+// @AllArgsConstructor
+// @NoArgsConstructor
 public class Menu {
+
+  @Id
   private int id;
 
   @NotNull(message = "name 속성은 Null일 수 없습니다.")
