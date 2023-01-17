@@ -36,39 +36,32 @@ public class MenuController  {
   }
   
   
-  @GetMapping(path = "{id}", produces = {
-    MediaType.APPLICATION_JSON_VALUE,
-    MediaType.APPLICATION_XML_VALUE
-  })
-  public ResponseEntity<Menu> get(@PathVariable int id){
-    // Menu menu = Menu.builder().name("newlecture").price(1000).build();
-    // System.out.println(menu.toString());
+  @GetMapping(path = "{id}")
+  public Menu get(@PathVariable int id){
+    Menu menu = service.get(id);
 
-    return new ResponseEntity<Menu>(HttpStatus.NOT_FOUND);
+    return menu;
   }
 
-  @PostMapping(consumes = {
-    MediaType.APPLICATION_JSON_VALUE,
-    MediaType.APPLICATION_XML_VALUE
-  })
+  @PostMapping()
   public Menu create(@Valid @RequestBody Menu menu){
+    // name, price만 전달, id 제외
+    service.create(menu);
 
+    // id를 포함한 새로운 menu
     return menu;
   }
 
   @PutMapping
   public Menu update(@RequestBody Menu menu){
+    Menu newOne = service.update(menu);
 
-    Menu m = null;
-    m.getId();
-    return menu;
+    return newOne;
   }
 
   @DeleteMapping("{id}")
-  public ResponseEntity<Void> delete(@PathVariable int id){
-
-    // 삭제 (응답코드 설정 가능)
-    return ResponseEntity.noContent().build();
+  public void delete(@PathVariable int id){
+    service.delete(id);
   }
 }
 
