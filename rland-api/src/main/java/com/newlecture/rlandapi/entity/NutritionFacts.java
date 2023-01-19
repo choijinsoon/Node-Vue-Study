@@ -1,5 +1,7 @@
 package com.newlecture.rlandapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,9 +22,9 @@ public class NutritionFacts {
   private int id;
   private int calories;
   private int saturatedFat;
-  private int menuId;
 
-  // @OneToOne
-  // @JoinColumn(name = "id")
-  // private Menu menu;
+  @JsonBackReference
+  @OneToOne
+  @JoinColumn(name = "menu_id")
+  private Menu menu;
 }
