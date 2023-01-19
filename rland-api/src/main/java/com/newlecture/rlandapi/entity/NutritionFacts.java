@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -22,9 +23,10 @@ public class NutritionFacts {
   private int id;
   private int calories;
   private int saturatedFat;
+  // private int menuId;
 
-  @JsonBackReference
-  @OneToOne
-  @JoinColumn(name = "menu_id")
-  private Menu menu;
+  // @JsonBackReference
+  // @OneToMany
+  // @JoinColumn(name = "menu_id")
+  // private Menu menu;
 }

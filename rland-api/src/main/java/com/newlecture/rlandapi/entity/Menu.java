@@ -29,8 +29,8 @@ public class Menu {
   private String name;
   private int price;
 
-  @JsonManagedReference
-  @OneToOne(mappedBy = "menu") // 외래 객체 찾기
+  @OneToOne
+  @JoinColumn(name = "id")
   private NutritionFacts nutritionFacts;
   
   // @OneToMany
