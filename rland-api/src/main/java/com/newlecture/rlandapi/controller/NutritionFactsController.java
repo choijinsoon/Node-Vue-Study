@@ -1,5 +1,6 @@
 package com.newlecture.rlandapi.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,18 @@ import com.newlecture.rlandapi.repository.NutritionFactsRepository;
 public class NutritionFactsController {
   
   @Autowired
-  private NutritionFactsRepository repo;
+  private NutritionFactsRepository repository;
 
+  @GetMapping()
+  public List<NutritionFacts> getList() {
+    List<NutritionFacts> list = repository.findAll();
+    return list;
+  }
+  
   @GetMapping("{id}")
   public NutritionFacts get(@PathVariable int id){
     NutritionFacts nutrition = null;
-    Optional<NutritionFacts> opt = repo.findById(id);
+    Optional<NutritionFacts> opt = repository.findById(id);
 
     if(opt.isPresent())
       nutrition = opt.get();
