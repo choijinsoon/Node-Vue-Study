@@ -7,13 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newlecture.rlandapi.entity.Menu;
+import com.newlecture.rlandapi.entity.MenuView;
+import com.newlecture.rlandapi.repository.CommnetRepository;
 import com.newlecture.rlandapi.repository.MenuRepository;
+import com.newlecture.rlandapi.repository.MenuViewRepository;
 
 @Service
 public class DefaultMenuService implements MenuService {
 
   @Autowired
   private MenuRepository repository;
+
+  @Autowired
+  private MenuViewRepository viewRepository;
+  
+  @Autowired
+  private CommnetRepository commnetRepository;
 
   @Override
   public Menu get(int id) {
@@ -59,6 +68,17 @@ public class DefaultMenuService implements MenuService {
   public void delete(int id) {
     repository.deleteById(id);
     
+  }
+
+  @Override
+  public List<MenuView> getViewList(int page, int size) {
+    List<MenuView> list = viewRepository.findAll();
+
+    for(MenuView view : list){
+      commnetRepository.findAll();
+      view.setComments(null);
+    }
+    return list;
   }
   
 }

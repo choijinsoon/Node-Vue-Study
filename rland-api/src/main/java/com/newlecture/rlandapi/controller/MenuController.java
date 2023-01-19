@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.newlecture.rlandapi.entity.Menu;
+import com.newlecture.rlandapi.entity.MenuView;
+import com.newlecture.rlandapi.repository.MenuViewRepository;
 import com.newlecture.rlandapi.service.MenuService;
 
 import jakarta.validation.Valid;
@@ -29,9 +31,10 @@ public class MenuController  {
   private MenuService service;
 
   @GetMapping
-  public List<Menu> getList(@RequestParam(name="p", defaultValue = "1") int page, @RequestParam(name="s", defaultValue = "15") int size){
+  public List<MenuView> getList(@RequestParam(name="p", defaultValue = "1") int page, @RequestParam(name="s", defaultValue = "15") int size){
     
-    List<Menu> list = service.getList(page, size);
+    // List<Menu> list = service.getList(page, size);
+    List<MenuView> list = service.getViewList(page, size);
     return list;
   }
   
