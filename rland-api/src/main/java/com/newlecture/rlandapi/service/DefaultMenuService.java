@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newlecture.rlandapi.entity.Comment;
 import com.newlecture.rlandapi.entity.Menu;
 import com.newlecture.rlandapi.entity.MenuView;
 import com.newlecture.rlandapi.repository.CommnetRepository;
@@ -22,7 +23,7 @@ public class DefaultMenuService implements MenuService {
   private MenuViewRepository viewRepository;
   
   @Autowired
-  private CommnetRepository commnetRepository;
+  private CommnetRepository commentRepository;
 
   @Override
   public Menu get(int id) {
@@ -75,8 +76,9 @@ public class DefaultMenuService implements MenuService {
     List<MenuView> list = viewRepository.findAll();
 
     for(MenuView view : list){
-      commnetRepository.findAll();
-      view.setComments(null);
+      List<Comment> comments = commentRepository.findAll().stream().filter(comment->comment.getMenuId() == view.getId()).toList();
+
+      view.setComments(comments);
     }
     return list;
   }

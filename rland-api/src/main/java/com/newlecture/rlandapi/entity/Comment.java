@@ -21,10 +21,11 @@ public class Comment {
   private int id;
   private String content;
   private Date regDate;
+  private int menuId;
   
-  @ManyToOne
-  @JoinColumn(name = "menu_id")
-  private Menu menu;
+  // @ManyToOne
+  // @JoinColumn(name = "menu_id")
+  // private Menu menu;
 
 
 }
