@@ -5,6 +5,14 @@ export default {
 			menus: [{ id: 1, name: "아메리카노" }, { id: 2, name: "카페라떼" }, {}, {}]
 		};
 	},
+	methods:{
+		//비동기형
+		async fetchMenus(){
+			const response = await fetch("http://localhost:8080/menus");
+				const json = await response.json();
+				this.menus = json;
+		}
+	},
 	beforeCreate(){
 		console.log("before Create");
 	},
@@ -16,27 +24,7 @@ export default {
 	},
 	mounted(){
 		console.log("mounted");
-
-		//동기형
-		// const promise =  fetch("http://localhost:8080/menus")
-		// .then(promise.json())
-		// .then(json=>{
-		// 	console.log(json)
-		// });
-
-		//비동기형
-		(async () =>{
-			const response = await fetch("http://localhost:8080/menus");
-			const json = await response.json();
-			console.log(json);
-			this.menus = json;
-		})();
-	},
-	//비동기형
-	async fetchMenus(){
-		const response = await fetch("http://localhost:8080/menus");
-			const json = response.json();
-			console.log(json);
+		this.fetchMenus();
 	},
 	beforeUpdate(){
 		console.log("before Update");
