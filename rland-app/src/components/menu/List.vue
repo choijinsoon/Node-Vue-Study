@@ -27,8 +27,9 @@ export default {
 		//비동기형
 		(async () =>{
 			const response = await fetch("http://localhost:8080/menus");
-			const json = response.json();
+			const json = await response.json();
 			console.log(json);
+			this.menus = json;
 		})();
 	},
 	//비동기형
