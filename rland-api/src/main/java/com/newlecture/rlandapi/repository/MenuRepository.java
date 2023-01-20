@@ -1,9 +1,11 @@
 package com.newlecture.rlandapi.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 import com.newlecture.rlandapi.entity.Menu;
 
-public interface MenuRepository extends JpaRepository<Menu, Integer>{
-  
+public interface MenuRepository{
+List<Menu> getList(int offset, int size);
+Menu get(int id);
+Menu create(Menu menu);
 }
