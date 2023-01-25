@@ -13,7 +13,7 @@ export default {
             console.log("in");
             this.displayNone='';
             this.hideRegForm=!this.hideRegForm;
-            this.showRegForm=true;
+            this.showRegForm=!this.showRegForm;
         },
 		//비동기형
 		async fetchMenus(){
@@ -176,14 +176,27 @@ export default {
 
 
 <style>
-.reg-form-enter-active,
-.reg-form-leave-active {
-  transition: opacity 0.5s ease;
+
+@keyframes bound-in {
+    from {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.25);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 
-.reg-form-enter-from,
+.reg-form-enter-active {
+    animation: bound-in 0.5s;
+}
+.reg-form-leave-active {
+    animation: bound-in 0.5s reverse;
+}
 .reg-form-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
 </style>
