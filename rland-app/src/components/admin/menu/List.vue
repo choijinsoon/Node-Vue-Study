@@ -97,35 +97,37 @@ export default {
             <h1 class="d-none">메뉴목록</h1>
             <div class="menu-list">
 
-                <section class="menu menu-reg-section border-bottom border-color-1" v-if="showRegForm">
-                    <form class="overflow-hidden">
-                        <h1><input type="text" class="input w-75 w-100-md" name="titile" placeholder="메뉴 이름을 입력하세요.">
-                        </h1>
-                        <div class="menu-img-box">
-                            <img src="/image/product/blank-img.png" class="img-input">
-                            <input type="file" class="d-none">
-                        </div>
-                        <div class="menu-price"><input class="w-75 w-50-md input ml-0 ml-1-md" type="text"
-                                placeholder="가격을 입력하세요"> 원</div>
-                        <div class="menu-option-list">
-                            <span class="menu-option">
-                                <input class="menu-option-input" type="checkbox">
-                                <label>ICED</label>
-                            </span>
-                            <span class="menu-option ml-2">
-                                <input class="menu-option-input" type="checkbox">
-                                <label>Large</label>
-                            </span>
-                        </div>
-                        <div class="menu-button-list">
-                            <input class="btn btn-line btn-round btn-size-1 btn-bd-blue rounded-0-md" type="submit"
-                                value="취소">
-                            <input
-                                class="btn btn-fill btn-round rounded-0-md btn-size-1 btn-bd-blue btn-color-blue ml-1"
-                                type="submit" value="저장">
-                        </div>
-                    </form>
-                </section>
+                <Transition name="reg-form">
+                    <section class="menu menu-reg-section border-bottom border-color-1" v-if="showRegForm">
+                        <form class="overflow-hidden">
+                            <h1><input type="text" class="input w-75 w-100-md" name="titile" placeholder="메뉴 이름을 입력하세요.">
+                            </h1>
+                            <div class="menu-img-box">
+                                <img src="/image/product/blank-img.png" class="img-input">
+                                <input type="file" class="d-none">
+                            </div>
+                            <div class="menu-price"><input class="w-75 w-50-md input ml-0 ml-1-md" type="text"
+                                    placeholder="가격을 입력하세요"> 원</div>
+                            <div class="menu-option-list">
+                                <span class="menu-option">
+                                    <input class="menu-option-input" type="checkbox">
+                                    <label>ICED</label>
+                                </span>
+                                <span class="menu-option ml-2">
+                                    <input class="menu-option-input" type="checkbox">
+                                    <label>Large</label>
+                                </span>
+                            </div>
+                            <div class="menu-button-list">
+                                <input class="btn btn-line btn-round btn-size-1 btn-bd-blue rounded-0-md" type="submit"
+                                    value="취소">
+                                <input
+                                    class="btn btn-fill btn-round rounded-0-md btn-size-1 btn-bd-blue btn-color-blue ml-1"
+                                    type="submit" value="저장">
+                            </div>
+                        </form>
+                    </section>
+                </Transition>
 
                 <section class="menu border-bottom border-color-1" v-for="m in menus" v-bind:key="m">
                     <form class="">
@@ -171,3 +173,17 @@ export default {
 
     </section>
 </template>
+
+
+<style>
+.reg-form-enter-active,
+.reg-form-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.reg-form-enter-from,
+.reg-form-leave-to {
+  opacity: 0;
+}
+
+</style>
