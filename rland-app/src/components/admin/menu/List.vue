@@ -3,13 +3,15 @@ export default {
 	data() {
 		return {
 			menus: [{ id: 1, name: "아메리카노" }, { id: 2, name: "카페라떼" }, {}, {}],
-            displayNone:'d-none'
+            displayNone:'d-none',
+            hideRegForm:true
 		};
 	},
 	methods:{
         addMenuBtnClickHandler(){
             console.log("in");
             this.displayNone='';
+            this.hideRegForm=!this.hideRegForm;
         },
 		//비동기형
 		async fetchMenus(){
@@ -93,7 +95,7 @@ export default {
             <h1 class="d-none">메뉴목록</h1>
             <div class="menu-list">
 
-                <section class="menu menu-reg-section border-bottom border-color-1" :class="displayNone">
+                <section class="menu menu-reg-section border-bottom border-color-1" :class="{displayNone:hideRegForm}">
                     <form class="overflow-hidden">
                         <h1><input type="text" class="input w-75 w-100-md" name="titile" placeholder="메뉴 이름을 입력하세요.">
                         </h1>
