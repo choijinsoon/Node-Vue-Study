@@ -6,7 +6,7 @@ export default {
             displayNone:'d-none',
             hideRegForm:true,
             showRegForm:false,
-            menu:{name:'', price:0}
+            menu:{name:'dddd', price:0}
 		};
 	},
 	methods:{
@@ -23,6 +23,12 @@ export default {
 				this.menus = json;
 		}
 	},
+  // 값이 변경 시 실행
+  computed:{
+    ice(){
+      return parseInt(this.menu.price)+500;
+    }
+  },
 	beforeCreate(){
 		console.log("before Create");
 	},
@@ -113,6 +119,7 @@ export default {
                                 <span class="menu-option">
                                     <input class="menu-option-input" type="checkbox">
                                     <label>ICED</label>
+                                    <input style="width:50px;" v-model="ice">
                                 </span>
                                 <span class="menu-option ml-2">
                                     <input class="menu-option-input" type="checkbox">
