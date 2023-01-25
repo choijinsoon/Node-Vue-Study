@@ -6,7 +6,8 @@ export default {
             displayNone:'d-none',
             hideRegForm:true,
             showRegForm:false,
-            menu:{name:'dddd', price:0}
+            menu:{name:'dddd', price:0},
+            query:''
 		};
 	},
 	methods:{
@@ -18,7 +19,7 @@ export default {
         },
 		//비동기형
 		async fetchMenus(){
-			const response = await fetch("http://localhost:8080/menus");
+			const response = await fetch(`http://localhost:8080/menus?q=${query}`);
 				const json = await response.json();
 				this.menus = json;
 		}
@@ -27,6 +28,11 @@ export default {
   computed:{
     ice(){
       return parseInt(this.menu.price)+500;
+    }
+  },
+  watch:{
+    query(){
+      console.log("watch");
     }
   },
 	beforeCreate(){
@@ -62,7 +68,7 @@ export default {
         <header class="search-header">
             <h1 class="text-title1-h1">알랜드 메뉴</h1>
             <form>
-                <input type="text">
+                <input type="text" v-model="query">
                 <input type="submit" class="icon icon-find">
             </form>
         </header>
