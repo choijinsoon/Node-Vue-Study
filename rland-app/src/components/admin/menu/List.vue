@@ -4,7 +4,8 @@ export default {
 		return {
 			menus: [{ id: 1, name: "아메리카노" }, { id: 2, name: "카페라떼" }, {}, {}],
             displayNone:'d-none',
-            hideRegForm:true
+            hideRegForm:true,
+            showRegForm:false
 		};
 	},
 	methods:{
@@ -12,6 +13,7 @@ export default {
             console.log("in");
             this.displayNone='';
             this.hideRegForm=!this.hideRegForm;
+            this.showRegForm=true;
         },
 		//비동기형
 		async fetchMenus(){
@@ -87,7 +89,7 @@ export default {
         <section class="cart-section">
             <h1 class="d-none">장바구니</h1>
             <span class="text-title3">커피음료</span>
-            <a class="btn btn-mini bg-blue" href="" @click.prevent="addMenuBtnClickHandler()">메뉴추가</a>
+            <a class="btn btn-mini bg-blue" href="" @click.prevent="addMenuBtnClickHandler">메뉴추가</a>
         </section>
 
 
@@ -95,7 +97,7 @@ export default {
             <h1 class="d-none">메뉴목록</h1>
             <div class="menu-list">
 
-                <section class="menu menu-reg-section border-bottom border-color-1" :class="{displayNone:hideRegForm}">
+                <section class="menu menu-reg-section border-bottom border-color-1" v-if="showRegForm">
                     <form class="overflow-hidden">
                         <h1><input type="text" class="input w-75 w-100-md" name="titile" placeholder="메뉴 이름을 입력하세요.">
                         </h1>
