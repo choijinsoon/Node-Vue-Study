@@ -2,10 +2,15 @@
 export default {
 	data() {
 		return {
-			menus: [{ id: 1, name: "아메리카노" }, { id: 2, name: "카페라떼" }, {}, {}]
+			menus: [{ id: 1, name: "아메리카노" }, { id: 2, name: "카페라떼" }, {}, {}],
+            displayNone:'d-none'
 		};
 	},
 	methods:{
+        addMenuBtnClickHandler(){
+            console.log("in");
+            this.displayNone='';
+        },
 		//비동기형
 		async fetchMenus(){
 			const response = await fetch("http://localhost:8080/menus");
@@ -63,7 +68,7 @@ export default {
                     <a href="/menu/list">전체</a>
                 </li>
                 <li>
-                    <a href="">커피음료</a>
+                    <a href="" :class="displayNone">커피음료</a>
                 </li>
                 <li>
                     <a href="">수제청</a>
@@ -80,7 +85,7 @@ export default {
         <section class="cart-section">
             <h1 class="d-none">장바구니</h1>
             <span class="text-title3">커피음료</span>
-            <a class="btn btn-mini bg-blue" href="">메뉴추가</a>
+            <a class="btn btn-mini bg-blue" href="" @click.prevent="addMenuBtnClickHandler()">메뉴추가</a>
         </section>
 
 
@@ -88,7 +93,7 @@ export default {
             <h1 class="d-none">메뉴목록</h1>
             <div class="menu-list">
 
-                <section class="menu menu-reg-section border-bottom border-color-1">
+                <section class="menu menu-reg-section border-bottom border-color-1" :class="displayNone">
                     <form class="overflow-hidden">
                         <h1><input type="text" class="input w-75 w-100-md" name="titile" placeholder="메뉴 이름을 입력하세요.">
                         </h1>
@@ -120,11 +125,11 @@ export default {
 
                 <section class="menu border-bottom border-color-1" v-for="m in menus" v-bind:key="m">
                     <form class="">
-                        <h1>알랜드 커피</h1>
+                        <h1>{{m.name}}</h1>
                         <div class="menu-img-box">
                             <a href="detail.html"><img class="menu-img" src="/image/product/12.png"></a>
                         </div>
-                        <div class="menu-price">4500 원</div>
+                        <div class="menu-price">{{m.price}} 원</div>
                         <div class="menu-option-list">
                             <span class="menu-option">
                                 <input class="menu-option-input" type="checkbox">
