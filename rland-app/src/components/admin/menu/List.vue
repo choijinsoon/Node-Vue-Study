@@ -5,7 +5,8 @@ export default {
 			menus: [{ id: 1, name: "아메리카노" }, { id: 2, name: "카페라떼" }, {}, {}],
             displayNone:'d-none',
             hideRegForm:true,
-            showRegForm:false
+            showRegForm:false,
+            menu:{name:'', price:0}
 		};
 	},
 	methods:{
@@ -100,14 +101,14 @@ export default {
                 <Transition name="reg-form">
                     <section class="menu menu-reg-section border-bottom border-color-1" v-if="showRegForm">
                         <form class="overflow-hidden">
-                            <h1><input type="text" class="input w-75 w-100-md" name="titile" placeholder="메뉴 이름을 입력하세요.">
+                            <h1><input type="text" class="input w-75 w-100-md" name="titile" placeholder="메뉴 이름을 입력하세요." v-model="menu.name">
                             </h1>
                             <div class="menu-img-box">
                                 <img src="/image/product/blank-img.png" class="img-input">
                                 <input type="file" class="d-none">
                             </div>
                             <div class="menu-price"><input class="w-75 w-50-md input ml-0 ml-1-md" type="text"
-                                    placeholder="가격을 입력하세요"> 원</div>
+                                    placeholder="가격을 입력하세요" v-model="menu.price"> 원</div>
                             <div class="menu-option-list">
                                 <span class="menu-option">
                                     <input class="menu-option-input" type="checkbox">
