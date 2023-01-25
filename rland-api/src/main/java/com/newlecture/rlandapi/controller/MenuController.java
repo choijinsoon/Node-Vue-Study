@@ -33,10 +33,10 @@ public class MenuController  {
 
   @CrossOrigin(origins = "http://localhost:5173")
   @GetMapping
-  public List<MenuView> getList(@RequestParam(name="p", defaultValue = "1") int page, @RequestParam(name="s", defaultValue = "15") int size){
+  public List<MenuView> getList(@RequestParam(name="q", defaultValue = "") String query, @RequestParam(name="p", defaultValue = "1") int page, @RequestParam(name="s", defaultValue = "15") int size){
     
     // List<Menu> list = service.getList(page, size);
-    List<MenuView> list = service.getViewList(page, size);
+    List<MenuView> list = service.getViewList(query, page, size);
     return list;
   }
   

@@ -72,8 +72,10 @@ public class DefaultMenuService implements MenuService {
   }
 
   @Override
-  public List<MenuView> getViewList(int page, int size) {
-    List<MenuView> list = viewRepository.findAll();
+  public List<MenuView> getViewList(String query, int page, int size) {
+    // List<MenuView> list = viewRepository.findAll().stream().filter(menuview->menuview.getName().contains(query)).toList();
+
+    List<MenuView> list = viewRepository.getViewList("%"+query+"%");
 
     for(MenuView view : list){
       List<Comment> comments = commentRepository.findAll().stream().filter(comment->comment.getMenuId() == view.getId()).toList();

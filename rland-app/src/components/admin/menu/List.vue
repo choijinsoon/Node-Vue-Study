@@ -19,7 +19,7 @@ export default {
         },
 		//비동기형
 		async fetchMenus(){
-			const response = await fetch(`http://localhost:8080/menus?q=${query}`);
+			const response = await fetch(`http://localhost:8080/menus?q=${this.query}`);
 				const json = await response.json();
 				this.menus = json;
 		}
@@ -32,7 +32,7 @@ export default {
   },
   watch:{
     query(){
-      console.log("watch");
+      this.fetchMenus();
     }
   },
 	beforeCreate(){
