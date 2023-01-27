@@ -1,4 +1,7 @@
 <script>
+import ConfirmButton from '../../ConfirmButton.vue';
+import ConfirmDlg from '../../ConfirmDlg.vue'
+
 export default {
 	data() {
 		return {
@@ -7,22 +10,69 @@ export default {
             hideRegForm:true,
             showRegForm:false,
             menu:{name:'dddd', price:0},
-            query:''
+            query:'',
+            open: false,
+            openDlg: false,
+            error: false
 		};
 	},
+    components: { ConfirmButton, ConfirmDlg },
 	methods:{
         addMenuBtnClickHandler(){
-            console.log("in");
             this.displayNone='';
             this.hideRegForm=!this.hideRegForm;
             this.showRegForm=!this.showRegForm;
         },
 		//비동기형
 		async fetchMenus(){
-			const response = await fetch(`http://localhost:8080/menus?q=${this.query}`);
-				const json = await response.json();
-				this.menus = json;
-		}
+            try{
+                const response = await fetch(`http://localhost:8080/menus?q=${this.query}`);
+                    const json = await response.json();
+                    this.menus = json;            
+            }catch(error){
+                this.error = error;
+            }finally{
+
+            }
+		},
+        async removeMenu(id){
+            try{
+                const response = await fetch(`http://localhost:8080/menus/${id}`,{
+                    method:'DELETE'
+                });         
+            this.fetchMenu(); 
+            }catch(error){
+                this.error = error;
+            }finally{
+
+            }
+		},
+        async postMenus(){
+			const response = await fetch(`http://localhost:8080/menus`,{
+                method: 'POST',
+                headers: {
+                    Accept:'application/json', 
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.menu)
+            });
+			
+            
+            const json = await response.json();
+            this.menus.unshift(json);
+            this.showRegForm = false;
+		},
+        dlgCloseHandler(e){
+            if(e.isOk)
+                this.showRegForm = false;
+        },
+        createMenuHandler(e){
+            this.postMenus();
+        },
+        removeDlgCloseHandler(e){
+            if(e.isOk)
+                this.removeMenu(e.targetId);
+        }
 	},
   // 값이 변경 시 실행
   computed:{
@@ -107,6 +157,10 @@ export default {
 
 
         <section class="menu-section">
+            <div v-if="error" style="color:red; text-align:center;">
+                오류가 발생하였습니다.<br>
+                {{error}}
+            </div>
             <h1 class="d-none">메뉴목록</h1>
             <div class="menu-list">
 
@@ -133,21 +187,12 @@ export default {
                                 </span>
                             </div>
                             <div class="menu-button-list">
-                                <input class="btn btn-line btn-round btn-size-1 btn-bd-blue rounded-0-md" type="submit"
-                                    value="취소">
-                                <teleport to='body'>
-                                    <section>
-                                        <h1>대화상자</h1>
-                                        <div>
-                                            <p>정말 취소하시겠습니까?</p>
-                                            <button>예</button>
-                                            <button @click.prevent="open - false">아니요</button>
-                                        </div>
-                                    </section>
-                                </teleport>
+                                <confirm-button class="btn btn-line btn-round btn-size-1 btn-bd-blue rounded-0-md" value="삭제" @onDlgClose.prevent="removeDlgCloseHandler" targetId="m.targetId">
+                                <span style="color: red;">정말 삭제하시겠습니까?</span>
+                                </confirm-button>
                                 <input
                                     class="btn btn-fill btn-round rounded-0-md btn-size-1 btn-bd-blue btn-color-blue ml-1"
-                                    type="submit" value="저장">
+                                    type="submit" value="저장" @click.prevent="createMenuHandler">
                             </div>
                         </form>
                     </section>
@@ -172,7 +217,10 @@ export default {
                         </div>
                         <div class="menu-button-list">
                             <input class="btn btn-line btn-round btn-size-1 rounded-0-md" type="submit" value="수정">
-                            <input class="btn btn-fill btn-round rounded-0-md btn-size-1 ml-1" type="submit" value="삭제">
+                            <ConfirmButton class="btn btn-fill btn-round rounded-0-md btn-size-1 ml-1" type="submit"
+                                value="삭제" :targetId="menus.id" @onDlgClose="removeDlgCloseHandler">
+                                <span style="color: red;">{{ menus.id }}정말 삭제하시겠습니까?</span>
+                            </ConfirmButton>
                         </div>
                     </form>
                 </section>
