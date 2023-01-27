@@ -51,10 +51,10 @@ public class MenuController  {
   @PostMapping()
   public Menu create(@Valid @RequestBody Menu menu){
     // name, price만 전달, id 제외
-    service.create(menu);
+    Menu newOne = service.create(menu);
 
     // id를 포함한 새로운 menu
-    return menu;
+    return newOne;
   }
 
   @PutMapping
