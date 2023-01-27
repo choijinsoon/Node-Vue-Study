@@ -31,7 +31,7 @@ public class MenuController  {
   @Autowired
   private MenuService service;
 
-  @CrossOrigin(origins = "http://localhost:5173")
+  // @CrossOrigin(origins = "http://localhost:5173")
   @GetMapping
   public List<MenuView> getList(@RequestParam(name="q", defaultValue = "") String query, @RequestParam(name="p", defaultValue = "1") int page, @RequestParam(name="s", defaultValue = "15") int size){
     
