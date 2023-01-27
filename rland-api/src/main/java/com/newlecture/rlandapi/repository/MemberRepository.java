@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 import com.newlecture.rlandapi.entity.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Integer>{
-  @Query("select m from member m where m.username = :username")
+  @Query(value = "select m from Member m where m.username like :username")
   Member findByUsername(@Param("username") String username);
 }

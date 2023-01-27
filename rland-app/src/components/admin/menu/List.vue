@@ -40,7 +40,7 @@ export default {
                 const response = await fetch(`http://localhost:8080/menus/${id}`,{
                     method:'DELETE'
                 });         
-            this.fetchMenu(); 
+            this.fetchMenus(); 
             }catch(error){
                 this.error = error;
             }finally{
@@ -219,8 +219,8 @@ export default {
                         <div class="menu-button-list">
                             <input class="btn btn-line btn-round btn-size-1 rounded-0-md" type="submit" value="수정">
                             <ConfirmButton class="btn btn-fill btn-round rounded-0-md btn-size-1 ml-1" type="submit"
-                                value="삭제" :targetId="menus.id" @onDlgClose="removeDlgCloseHandler">
-                                <span style="color: red;">{{ menus.id }}정말 삭제하시겠습니까?</span>
+                                value="삭제" :targetId="m.id" @onDlgClose="removeDlgCloseHandler">
+                                <span style="color: red;">{{ m.id }}정말 삭제하시겠습니까?</span>
                             </ConfirmButton>
                         </div>
                     </form>
