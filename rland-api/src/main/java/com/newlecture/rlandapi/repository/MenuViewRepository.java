@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import com.newlecture.rlandapi.entity.MenuView;
 
 public interface MenuViewRepository extends JpaRepository<MenuView, Integer>{
-  @Query("select mv from MenuView mv where mv.name like :query")
+  @Query("select mv from MenuView mv where mv.name like :query order by id desc")
   List<MenuView> getViewList(@Param("query") String query, Pageable pageable);
 }

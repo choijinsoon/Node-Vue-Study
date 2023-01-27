@@ -187,9 +187,10 @@ export default {
                                 </span>
                             </div>
                             <div class="menu-button-list">
-                                <confirm-button class="btn btn-line btn-round btn-size-1 btn-bd-blue rounded-0-md" value="삭제" @onDlgClose.prevent="removeDlgCloseHandler" targetId="m.targetId">
-                                <span style="color: red;">정말 삭제하시겠습니까?</span>
-                                </confirm-button>
+                                <ConfirmButton class="btn btn-line btn-round btn-size-1 btn-bd-blue rounded-0-md"
+                                    value="취소" @onDlgClose="dlgCloseHandler">
+                                    <span style="color: red;">정말 취소하시겠습니까?</span>
+                                </ConfirmButton>
                                 <input
                                     class="btn btn-fill btn-round rounded-0-md btn-size-1 btn-bd-blue btn-color-blue ml-1"
                                     type="submit" value="저장" @click.prevent="createMenuHandler">
