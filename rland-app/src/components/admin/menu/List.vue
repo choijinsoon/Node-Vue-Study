@@ -135,6 +135,16 @@ export default {
                             <div class="menu-button-list">
                                 <input class="btn btn-line btn-round btn-size-1 btn-bd-blue rounded-0-md" type="submit"
                                     value="취소">
+                                <teleport to='body'>
+                                    <section>
+                                        <h1>대화상자</h1>
+                                        <div>
+                                            <p>정말 취소하시겠습니까?</p>
+                                            <button>예</button>
+                                            <button @click.prevent="open - false">아니요</button>
+                                        </div>
+                                    </section>
+                                </teleport>
                                 <input
                                     class="btn btn-fill btn-round rounded-0-md btn-size-1 btn-bd-blue btn-color-blue ml-1"
                                     type="submit" value="저장">
