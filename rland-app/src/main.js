@@ -11,6 +11,8 @@ import AdminMenuLayout from "./components/admin/menu/Layout.vue";
 import AdminMenuList from "./components/admin/menu/List.vue";
 import AdminIndex from "./components/Index.vue"
 
+import UserLogin from "./components/user/Login.vue"
+
 import App from './App.vue'
 
 
@@ -30,6 +32,9 @@ const routes = createRouter({
             {path:'menu', component:MenuLayout, children:[
                 {path:'list', component:MenuList}
             ]},
+        ]},
+        {path:'/user', component:Layout, children:[
+            {path:'login', component:UserLogin}
         ]},
         /**
          * /admin
