@@ -97,13 +97,6 @@ export default {
 	},
 	mounted(){
 		console.log("mounted");
-        if(this.userDetails.username == null){
-            alert('권한이 없어서 로그인 페이지로 이동합니다.');
-
-            this.$router.push({path:'/user/login', query:{returnURL:'/admin/menu/list'}});
-            return;
-        }
-
 		this.fetchMenus();
 	},
 	beforeUpdate(){

@@ -46,7 +46,13 @@ const routes = createRouter({
             {path:'menu', component:AdminMenuLayout, children:[
                 {path:'list', component:AdminMenuList}
             ]},
-        ]}
+        ], beforeEnter:(to, from, next)=>{
+            // /admin/** 로 접속 전에 처리할 내용을 입력
+            if(false)
+                next();
+            else
+                next('/user/login')
+        }}
     ]
 });
 
