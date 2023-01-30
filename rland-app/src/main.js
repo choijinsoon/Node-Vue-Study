@@ -50,6 +50,7 @@ const routes = createRouter({
     ]
 });
 
-createApp(App)
-.use(routes)
+const app = createApp(App)
+app.config.unwrapInjectedRef = true;
+app.use(routes)
 .mount('#app')
