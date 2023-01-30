@@ -1,8 +1,12 @@
 <script>
+import bcrypt from 'bcryptjs';
 export default {
   data() {
     return {
+      // 사용자 입력 데이터
       user: { uid: "", pwd: "" },
+      // DB 데이터
+      member:{}
     };
   },
   methods: {
@@ -10,12 +14,20 @@ export default {
       const response = await fetch(`http://localhost:8080/members/${uid}`);
 
       const json = await response.json();
-      console.log(json);
+      this.member = json;
     },
     loginHandler() {
       this.getUser(this.user.uid);
     },
   },
+  watch:{
+    member(newOne){
+      // 회원 정보를 가져와서 member 값을 변경했다면 인증을 처리
+      bcrypt.compare(this.user.pwd, newOne.pwd, (err, res)=>{
+        console.log(res);
+      });
+    }
+  }
 };
 </script>
 
