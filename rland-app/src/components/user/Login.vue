@@ -30,6 +30,7 @@ export default {
           console.log(this.userDetails);
           // 로그인된 페이지로 이동
           this.userDetails.username = this.user.uid;
+          this.$router.push('/admin/index');
         }
       });
     }
