@@ -7,7 +7,8 @@ export default {
       // 사용자 입력 데이터
       user: { uid: "", pwd: "" },
       // DB 데이터
-      member:{}
+      member:{},
+      error:false
     };
   },
   methods: {
@@ -40,6 +41,8 @@ export default {
           this.$router.push('/admin/index');
           return;
         }
+
+        this.error = true;
       });
     }
   }
@@ -54,6 +57,9 @@ export default {
       </header>
       <section class="login">
         <h1 class="d-none">일반 로그인</h1>
+        <div v-if="error" style="color:red;text-align:center;padding:20px">
+          아이디 또는 비밀번호가 일치하지 않습니다.
+        </div>
         <form>
           <div class="d-flex align-items-center">
             <label class="d-none">아이디</label
