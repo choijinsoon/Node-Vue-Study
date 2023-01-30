@@ -1,13 +1,14 @@
 <script>
+import { computed } from 'vue';
 export default{
-  provide(){
-    return {
-      userDetails:{username:'newlec'}
-    }
-  },
   data(){
     return{
-
+      userDetails:{username:null}
+    }
+  },
+  provide(){
+    return {
+      userDetails:computed(() =>this.userDetails)
     }
   }
 }
