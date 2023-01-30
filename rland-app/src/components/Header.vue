@@ -1,6 +1,12 @@
 <script>
 export default{
-    inject:['userDetails']
+    inject:['userDetails'],
+    methods:{
+        logoutHandler(e){
+            this.userDetails.username = null;
+            this.$router.push("/index");
+        }
+    }
 }
 
 </script>
@@ -16,7 +22,7 @@ export default{
                 <li><router-link to="/">공지사항</router-link></li>
                 <li>
                     <router-link v-if="userDetails.username == null" to="/user/login">로그인</router-link>
-                    <router-link v-if="userDetails.username != null" to="/user/logout">로그아웃</router-link>
+                    <router-link v-if="userDetails.username != null" to="/user/logout" @click.prevent="logoutHandler">로그아웃</router-link>
                 </li>
             </ul>
             <div class="d-none-sm"><a class="icon icon-menu icon-white" href="?m=on">메뉴버튼</a></div>
