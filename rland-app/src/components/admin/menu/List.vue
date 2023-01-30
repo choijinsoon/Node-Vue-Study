@@ -3,6 +3,7 @@ import ConfirmButton from '../../ConfirmButton.vue';
 import ConfirmDlg from '../../ConfirmDlg.vue'
 
 export default {
+    inject:['userDetails'],
 	data() {
 		return {
 			menus: [{ id: 1, name: "아메리카노" }, { id: 2, name: "카페라떼" }, {}, {}],
@@ -96,6 +97,13 @@ export default {
 	},
 	mounted(){
 		console.log("mounted");
+        if(this.userDetails.username == null){
+            alert('권한이 없어서 로그인 페이지로 이동합니다.');
+
+            this.$router.push({path:'/user/login', query:{returnURL:'/admin/menu/list'}});
+            return;
+        }
+
 		this.fetchMenus();
 	},
 	beforeUpdate(){
