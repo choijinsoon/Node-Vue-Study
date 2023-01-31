@@ -1,62 +1,56 @@
-<script>
-import { useAuthStore } from '../../stores/UserDetails';
-import bcrypt from 'bcryptjs';
-export default {
-  setup(){
-    const store = useAuthStore()
+<script setup>
+  import { useAuthStore } from '../../stores/UserDetails';
+  import { useRoute, useRouter } from 'vue-router'
+  import bcrypt from 'bcryptjs';
+  import { onUpdated, reactive, watch } from '@vue/runtime-core';
 
-    return{
-      store
-    }
-  },
-  inject:['userDetails'],
-  data() {
-    return {
-      // 사용자 입력 데이터
-      user: { uid: "", pwd: "" },
-      // DB 데이터
-      member:{},
-      error:false
-    };
-  },
-  methods: {
-    async getUser(uid) {
-      const response = await fetch(`http://localhost:8080/members/${uid}`);
+  const route = useRoute();
+  const router = useRouter();
+  const store = useAuthStore();
 
-      const json = await response.json();
-      this.member = json;
-    },
-    loginHandler() {
-      this.getUser(this.user.uid);
-    },
-  },
-  watch:{
-    member(newOne){
-      // 회원 정보를 가져와서 member 값을 변경했다면 인증을 처리
-      bcrypt.compare(this.user.pwd, newOne.pwd, (err, res)=>{
-        if(res){
-          // 인증 상태 저장
-          console.log(this.store.username);
-          // 로그인된 페이지로 이동
-          this.store.userDetails.username = this.user.uid;
-          console.log(this.store.username);
-          
-          if(this.$route.query.returnURL){
-            this.$router.push(this.$route.query.returnURL);
-            return;
-          }
+  const user = reactive({ uid: "", pwd: "" });
+  const reactMember = reactive({member:{}});
+  const error = false;
 
+  async function getUser(uid) {
+    const response = await fetch(`http://localhost:8080/members/${uid}`);
 
-          this.$router.push('/admin/index');
+    const json = await response.json();
+    reactMember.member = json;
+  };
+
+  function loginHandler() {
+    getUser(user.uid);
+  }
+
+  watch(reactMember, ({member:newOne}, prevOne)=>{
+    console.log("watch")
+    bcrypt.compare(user.pwd, newOne.pwd, (err, res)=>{
+      if(res){
+        // 인증 상태 저장
+        console.log(store.username);
+        // 로그인된 페이지로 이동
+        store.userDetails.username = user.uid;
+        console.log(store.username);
+        
+        if(route.query.returnURL){
+          router.push(route.query.returnURL);
           return;
         }
 
-        this.error = true;
-      });
-    }
-  }
-};
+
+        router.push('/admin/index');
+        return;
+      }
+    error = true;
+    });
+  })
+
+  onUpdated(()=>{
+    console.log("updated");
+  })
 </script>
+
 
 <template>
   <main>
