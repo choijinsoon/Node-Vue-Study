@@ -1,18 +1,11 @@
-<script>
+<script setup>
 import { useAuthStore } from '../stores/UserDetails';
-export default{
-    setup(){
-        const store = useAuthStore();
-        return{
-            store
-        }
-    },
-    methods:{
-        logoutHandler(e){
-            this.store.invalid(); // 상태 저장소 변수 초기화
-            this.$router.push("/index");
-        }
-    }
+
+const store = useAuthStore();
+
+function logoutHandler(e){
+    this.store.invalid(); // 상태 저장소 변수 초기화
+    this.$router.push("/index");
 }
 
 </script>
