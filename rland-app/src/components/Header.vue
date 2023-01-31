@@ -1,11 +1,13 @@
 <script setup>
 import { useAuthStore } from '../stores/UserDetails';
+import { useRouter } from 'vue-router';
 
 const store = useAuthStore();
+const router = useRouter();
 
 function logoutHandler(e){
-    this.store.invalid(); // 상태 저장소 변수 초기화
-    this.$router.push("/index");
+    store.invalid(); // 상태 저장소 변수 초기화
+    router.push("/index");
 }
 
 </script>
