@@ -9,7 +9,7 @@ export default{
     },
     methods:{
         logoutHandler(e){
-            this.userDetails.username = null;
+            this.store.invalid(); // 상태 저장소 변수 초기화
             this.$router.push("/index");
         }
     }
