@@ -1,17 +1,8 @@
-<script>
-import { computed } from 'vue';
-export default{
-  data(){
-    return{
-      userDetails:{username:null}
-    }
-  },
-  provide(){
-    return {
-      userDetails:computed(() =>this.userDetails)
-    }
-  }
-}
+<script setup>
+import { provide, reactive } from 'vue';
+
+const userDetails = reactive({username:null});
+provide('userDetails', {username:null});
 </script>
 
 <template>
