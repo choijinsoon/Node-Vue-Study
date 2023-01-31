@@ -1,6 +1,4 @@
 <script>
-import {useAuthStore} from '../stores/UserDetails'
-const userDetails = useAuthStore();
 
 export default{
     inject:['userDetails'],

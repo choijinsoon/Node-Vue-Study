@@ -1,6 +1,14 @@
 <script>
+import { useAuthStore } from '../../stores/UserDetails';
 import bcrypt from 'bcryptjs';
 export default {
+  setup(){
+    const store = useAuthStore()
+
+    return{
+      store
+    }
+  },
   inject:['userDetails'],
   data() {
     return {
@@ -28,9 +36,10 @@ export default {
       bcrypt.compare(this.user.pwd, newOne.pwd, (err, res)=>{
         if(res){
           // 인증 상태 저장
-          console.log(this.userDetails);
+          console.log(this.store.username);
           // 로그인된 페이지로 이동
-          this.userDetails.username = this.user.uid;
+          this.store.userDetails.username = this.user.uid;
+          console.log(this.store.username);
           
           if(this.$route.query.returnURL){
             this.$router.push(this.$route.query.returnURL);

@@ -3,7 +3,10 @@ import { defineStore } from 'pinia'
 export const useAuthStore = defineStore({
   id:'userDetails',
   state:()=>({
-    userDetails:{username:'soon'}
+    userDetails:{
+      username:null,
+      role:null
+    }
   }),
   getters:{
     username:(state)=>state.userDetails.username
@@ -14,6 +17,7 @@ export const useAuthStore = defineStore({
     },
     invalid(){
       this.userDetails.username = null;
+      this.userDetails.role = null;
     },
     setAuth(value){
       this.userDetails.username = value;

@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia';
+import { useAuthStore } from './stores/UserDetails';
 import { createRouter, createWebHistory } from "vue-router";
 
 import Layout from "./components/Layout.vue";
@@ -15,8 +17,13 @@ import UserLogin from "./components/user/Login.vue"
 
 import App from './App.vue'
 
+const pinia = createPinia();
 
+const app = createApp(App)
+app.config.unwrapInjectedRef = true;
+app.use(pinia)
 
+const store = useAuthStore();
 
 const routes = createRouter({
     history:createWebHistory(import.meta.env.VITE_APP_BASE_PATH),
@@ -48,7 +55,7 @@ const routes = createRouter({
             ]},
         ], beforeEnter:(to, from, next)=>{
             // /admin/** 로 접속 전에 처리할 내용을 입력
-            if(false)
+            if(store.username)
                 next();
             else
                 next('/user/login')
@@ -56,7 +63,5 @@ const routes = createRouter({
     ]
 });
 
-const app = createApp(App)
-app.config.unwrapInjectedRef = true;
 app.use(routes)
 .mount('#app')
